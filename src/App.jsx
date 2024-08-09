@@ -8,33 +8,72 @@ import Register from "./Components/Register/Register";
 import Categories from "./Components/Categories/Categories";
 import Brands from "./Components/Brands/Brands";
 import Login from "./Components/Login/Login";
-import Logout from "./Components/Logout/Logout";
 import { Toaster } from "react-hot-toast";
-
+import AuthContextProvider from "./Context/AuthContext";
+import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 
 function App() {
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: "ecommerce-route",
       element: <Layout />,
       children: [
-        { index: true, element: <Products /> },
+        {
+          index: true,
+          element: <Products />,
+        },
         { path: "*", element: <NotFound /> },
-        { path: "/home", element: <Home /> },
-        { path: "/products", element: <Products /> },
-        { path: "/cart", element: <Cart /> },
-        { path: "/register", element: <Register /> },
-        { path: "/categories", element: <Categories /> },
-        { path: "/brands", element: <Brands /> },
-        { path: "/login", element: <Login /> },
-        { path: "/logout", element: <Logout /> },
+        {
+          path: "home",
+          element: (
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "products",
+          element: (
+            <ProtectedRoute>
+              <Products />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "cart",
+          element: (
+            <ProtectedRoute>
+              <Cart />
+            </ProtectedRoute>
+          ),
+        },
+        { path: "register", element: <Register /> },
+        {
+          path: "categories",
+          element: (
+            <ProtectedRoute>
+              <Categories />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "brands",
+          element: (
+            <ProtectedRoute>
+              <Brands />
+            </ProtectedRoute>
+          ),
+        },
+        { path: "login", element: <Login /> },
       ],
     },
   ]);
   return (
     <>
-    <Toaster/>
-      <RouterProvider router={router} />
+      <AuthContextProvider>
+        <Toaster />
+        <RouterProvider router={router} />
+      </AuthContextProvider>
     </>
   );
 }

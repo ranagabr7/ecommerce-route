@@ -1,18 +1,19 @@
 import axios from "axios";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import { authContext } from "../../Context/AuthContext";
+// ----------------------------u
+
 const Login = () => {
   const [isLoading, setisLoading] = useState(false);
   const navigate = useNavigate();
+  const { setToken } = useContext(authContext);
   const user = {
-    name: "",
     email: "",
     password: "",
-    rePassword: "",
-    phone: "",
   };
   async function loginUser(values) {
     setisLoading(true);
@@ -23,8 +24,11 @@ const Login = () => {
         values
       );
       toast.success(responses.data.message);
+      setToken(responses.data.token);
+      localStorage.setItem("tKn",responses.data.token )
+
+      navigate("/ecommerce-route/");
       setisLoading(false);
-      navigate("/Products");
     } catch (error) {
       toast.error(error.response.data.message);
       setisLoading(false);
@@ -36,7 +40,10 @@ const Login = () => {
       .email("Enter valid email"),
     password: Yup.string()
       .required("Password is required")
-      .matches(/^[A-Z][a-z0-9]{3,15}$/, "password must strat Uppercase char"),
+      .matches(
+        /^[A-Za-z][a-z0-9]{3,15}$/,
+        "password must strat Uppercase char"
+      ),
   });
   const formik = useFormik({
     initialValues: user,

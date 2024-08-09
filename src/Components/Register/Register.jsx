@@ -24,7 +24,7 @@ const Register = () => {
       );
       toast.success(responses.data.message);
       setisLoading(false);
-      navigate("/Login");
+      navigate("/ecommerce-route/Login");
     } catch (error) {
       toast.error(error.response.data.message);
       setisLoading(false);
@@ -40,7 +40,7 @@ const Register = () => {
       .email("Enter valid email"),
     password: Yup.string()
       .required("Password is required")
-      .matches(/^[A-Z][a-z0-9]{3,15}$/, "password must strat Uppercase char"),
+      .matches(/^[A-Za-z][a-z0-9]{3,15}$/, "password must strat Uppercase char"),
     rePassword: Yup.string()
       .required("Repassword is required")
       .oneOf([Yup.ref("password")]),
