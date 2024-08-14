@@ -1,9 +1,15 @@
+
+
+
 const Cart = () => {
   return (
     <>
-    <div>Cart</div>
-    </>
-  )
-}
+        <section className="cart py-12">
+ <h1>ggff</h1>
 
-export default Cart
+      </section>
+    </>
+  );
+};
+
+export default Cart;

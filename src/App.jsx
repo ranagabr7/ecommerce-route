@@ -11,8 +11,12 @@ import Login from "./Components/Login/Login";
 import { Toaster } from "react-hot-toast";
 import AuthContextProvider from "./Context/AuthContext";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
+import { QueryClient, QueryClientProvider } from "react-query";
+import WishList from "./Components/WishList/WishList";
+import ProductDetails from "./Components/ProductDetails/ProductDetails";
 
 function App() {
+  const x = new QueryClient();
   const router = createBrowserRouter([
     {
       path: "ecommerce-route",
@@ -20,7 +24,7 @@ function App() {
       children: [
         {
           index: true,
-          element: <Products />,
+          element: <Login />,
         },
         { path: "*", element: <NotFound /> },
         {
@@ -28,6 +32,14 @@ function App() {
           element: (
             <ProtectedRoute>
               <Home />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "productDetails/:id",
+          element: (
+            <ProtectedRoute>
+              <ProductDetails />
             </ProtectedRoute>
           ),
         },
@@ -44,6 +56,14 @@ function App() {
           element: (
             <ProtectedRoute>
               <Cart />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "wishList",
+          element: (
+            <ProtectedRoute>
+              <WishList />
             </ProtectedRoute>
           ),
         },
@@ -68,12 +88,15 @@ function App() {
       ],
     },
   ]);
+
   return (
     <>
-      <AuthContextProvider>
-        <Toaster />
-        <RouterProvider router={router} />
-      </AuthContextProvider>
+      <QueryClientProvider client={x}>
+        <AuthContextProvider>
+          <Toaster />
+          <RouterProvider router={router} />
+        </AuthContextProvider>
+      </QueryClientProvider>
     </>
   );
 }

@@ -1,7 +1,7 @@
 const Brands = () => {
   return (
     <>
-    <div>Brands</div>
+ <h1 className="py-9">Brands</h1>
     </>
   )
 }
