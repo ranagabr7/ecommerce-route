@@ -11,7 +11,12 @@ h1 {
 .row {
   @apply flex flex-wrap py-8 items-center justify-center;
 }
-/* ------ */
+.shadow:hover
+{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition:all 0.5s;
+   
+}
 nav{
   position: fixed;
   top:0;
@@ -34,7 +39,8 @@ nav .logo {
 }
 nav .menuIcon {
   display: none;
-  border:1px solid #f8f9fa;
+border:1px solid rgb(182, 181, 181);
+border-radius:12px;
   padding:5px 15px;
 }
 @media (max-width: 768px) {
@@ -52,7 +58,7 @@ nav .menuIcon {
     width: 100%;
     transition: all 0.5s;
   }
-  nav  ul.open {
+  nav  ul .open {
     display: flex;
   }
   nav .links ul li {

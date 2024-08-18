@@ -1,9 +1,12 @@
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import {  NavLink, useNavigate } from "react-router-dom";
 import logo from "./../../assets/images/logo.svg";
 import { useContext, useState } from "react";
 import { authContext } from "../../Context/AuthContext";
-<Link></Link>
+import { CartContext } from "../../Context/CartContext";
+import navbarStyle from "./navbar.module.css"
+
 const Navbar = () => {
+ const {numofItems}= useContext(CartContext)
   const [openlinks, setopenLinks] = useState(false);
   const navigate = useNavigate();
   function logOut() {
@@ -14,17 +17,17 @@ const Navbar = () => {
   const { setToken, token } = useContext(authContext);
   return (
     <>
-      <nav className="bg-gray-200 md:py-3  px-5  top-0 z-30">
-        <div className="container ">
-          <div className="logo">
+      <nav className="bg-gray-100 md:py-3  px-5  top-0 z-30">
+        <div className={navbarStyle.container }>
+          <div className={navbarStyle.logo}>
             <img src={logo} alt="logo" width={120} />
             <div
-              className="menuIcon"
+              className={navbarStyle.menuIcon}
               onClick={() => {
                 setopenLinks(!openlinks);
               }}
             >
-              <i className="fa-solid fa-bars menu text-3xl "></i>
+              <i className="fa-solid fa-bars menu text-3xl font-semibold text-gray-600 "></i>
             </div>
             <div className="registration ">
               {token ? (
@@ -33,7 +36,7 @@ const Navbar = () => {
                 </button>
               ) : (
                 <>
-                  <ul  className="" >
+                  <ul className="">
                     <li>
                       <NavLink to="login" className="mx-3 text-slate-600">
                         Login
@@ -50,37 +53,40 @@ const Navbar = () => {
             </div>
           </div>
           <div className="links">
-            <ul className={openlinks ? "open" : ""}>
+            <ul className={openlinks ?` ${navbarStyle.open} `: ""}>
               {token ? (
                 <>
-                  <li>
-                    <NavLink to="home" className="mx-3 text-slate-600">
+                  <li className="my-3 lg:my-0">
+                    <NavLink to="home" className="mx-4 text-slate-600">
                       Home
                     </NavLink>
                   </li>
-                  <li>
-                    <NavLink to="cart" className="mx-3 text-slate-600">
+                  <li className="relative my-3 lg:my-0">
+                    <NavLink to="cart" className="mx-4 text-slate-600">
                       Cart
+                      <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
+                      {numofItems}
+                      </div>
                     </NavLink>
                   </li>
-                  <li>
-                    <NavLink to="wishList" className="mx-3 text-slate-600">
+                  <li className="my-3 lg:my-0">
+                    <NavLink to="wishList" className="mx-4 text-slate-600">
                       wish list
                     </NavLink>
                   </li>
-                  <li>
-                    <NavLink to="products" className="mx-3 text-slate-600">
+                  <li className="my-3 lg:my-0">
+                    <NavLink to="products" className="mx-4 text-slate-600">
                       Products
                     </NavLink>
                   </li>
 
-                  <li>
-                    <NavLink to="categories" className="mx-3 text-slate-600">
+                  <li className="my-3 lg:my-0">
+                    <NavLink to="categories" className="mx-4 text-slate-600">
                       Categories
                     </NavLink>
                   </li>
-                  <li>
-                    <NavLink to="brands" className="mx-3 text-slate-600">
+                  <li className="my-3 lg:my-0">
+                    <NavLink to="brands" className="mx-4 text-slate-600">
                       Brands
                     </NavLink>
                   </li>

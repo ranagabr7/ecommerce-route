@@ -14,6 +14,7 @@ import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import { QueryClient, QueryClientProvider } from "react-query";
 import WishList from "./Components/WishList/WishList";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
+import CartContextProvider from "./Context/CartContext";
 
 function App() {
   const x = new QueryClient();
@@ -93,8 +94,10 @@ function App() {
     <>
       <QueryClientProvider client={x}>
         <AuthContextProvider>
-          <Toaster />
-          <RouterProvider router={router} />
+          <CartContextProvider>
+            <Toaster />
+            <RouterProvider router={router} />
+          </CartContextProvider>
         </AuthContextProvider>
       </QueryClientProvider>
     </>

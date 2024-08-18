@@ -3,12 +3,30 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { TailSpin } from "react-loader-spinner";
+import { useContext, useState } from "react";
+import { CartContext } from "../../Context/CartContext";
+import toast from "react-hot-toast";
 const ProductDetails = () => {
+  const [loader, setloader] = useState(false);
+  const { addProductToCart } = useContext(CartContext);
   const { id } = useParams();
   async function getAllProductDetails() {
     return await axios.get(
       `https://ecommerce.routemisr.com/api/v1/products/${id}`
     );
+  }
+  async function addProductDetailsToCart() {
+    setloader(true);
+    const data = await addProductToCart(id);
+    console.log(data);
+    if (data) {
+      toast.success(data.message);
+      setloader(false);
+    } else {
+        setloader(false);
+      toast.error("error: product not added to cart");
+     
+    }
   }
   const { data, isLoading } = useQuery(`product${id}`, getAllProductDetails);
 
@@ -38,16 +56,12 @@ const ProductDetails = () => {
               alt={data?.data.data.title}
             />
           </div>
-          <div className="md:w-3/4 p-5 w-full relative">
-            {/* to do logic */}
-
+          <div className="md:w-3/4 p-5 w-full">
             <h2 className="text-2xl font-semibold mb-3 ">
               {data?.data.data.title}
             </h2>
             <p className="mb-3 text-xl "> {data?.data.data.description}</p>
-            <div className="icon absolute right-10 top-50 ">
-              <i className="fa-solid fa-heart text-2xl cursor-pointer"></i>
-            </div>
+
             <h3 className="text-xl font-mono mb-3 text-green-700">
               {data?.data.data.category.name}
             </h3>
@@ -60,12 +74,23 @@ const ProductDetails = () => {
                 {data?.data.data.ratingsAverage}
               </h4>
             </div>
-            <button
-              type="button"
-              className="w-full mt-4 focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-            >
-              Add To Cart
-            </button>
+            <div className="flex items-center justify-center">
+              <button
+                onClick={addProductDetailsToCart}
+                type="button"
+                className="w-full mt-4 focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+              >
+                {loader ? (
+              <i className="fa-solid fa-spinner fa-spin text-white"></i>
+                ) : (
+                  "Add To Cart"
+                )}
+              </button>
+              {/* to do logic add to favourit */}
+              <div className="icon ">
+                <i className="fa-solid fa-heart text-2xl cursor-pointer"></i>
+              </div>
+            </div>
           </div>
         </div>
       </section>
