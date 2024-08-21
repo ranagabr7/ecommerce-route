@@ -15,6 +15,8 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import WishList from "./Components/WishList/WishList";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
 import CartContextProvider from "./Context/CartContext";
+import AddtoWishListprovider from "./Context/AddtoWishListContext";
+
 
 function App() {
   const x = new QueryClient();
@@ -94,10 +96,12 @@ function App() {
     <>
       <QueryClientProvider client={x}>
         <AuthContextProvider>
-          <CartContextProvider>
-            <Toaster />
-            <RouterProvider router={router} />
-          </CartContextProvider>
+          <AddtoWishListprovider>
+            <CartContextProvider>
+              <Toaster />
+              <RouterProvider router={router} />
+            </CartContextProvider>
+          </AddtoWishListprovider>
         </AuthContextProvider>
       </QueryClientProvider>
     </>
