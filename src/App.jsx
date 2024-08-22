@@ -16,7 +16,11 @@ import WishList from "./Components/WishList/WishList";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
 import CartContextProvider from "./Context/CartContext";
 import AddtoWishListprovider from "./Context/AddtoWishListContext";
-
+import Payment from "./Components/Payment/Payment";
+import AllOrder from "./Components/AllOrder/AllOrder";
+import ForgetPassword from "./Components/ForgetPassword/ForgetPassword";
+import ResetCode from "./Components/ResetCode/ResetCode";
+import ResetAccount from "./Components/ResetAccount/ResetAccount";
 
 function App() {
   const x = new QueryClient();
@@ -84,6 +88,34 @@ function App() {
           element: (
             <ProtectedRoute>
               <Brands />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "allorders",
+          element: (
+            <ProtectedRoute>
+              <AllOrder />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "forgetPassword",
+          element: <ForgetPassword />,
+        },
+        {
+          path: "resetaccount",
+          element: <ResetAccount />,
+        },
+        {
+          path: "recetCode",
+          element: <ResetCode />,
+        },
+        {
+          path: "payment",
+          element: (
+            <ProtectedRoute>
+              <Payment />
             </ProtectedRoute>
           ),
         },

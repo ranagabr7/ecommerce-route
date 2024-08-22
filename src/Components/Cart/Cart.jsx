@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { CartContext } from "../../Context/CartContext";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
-  const { productCart, TotalPrice, updateCartCount, deleteProduct } =
+  const { productCart, TotalPrice, updateCartCount, deleteProduct, clearCart } =
     useContext(CartContext);
-  console.log(productCart);
 
   return (
     <>
@@ -17,13 +17,16 @@ const Cart = () => {
                 <span className="text-green-600"> {TotalPrice}</span>
               </h2>
               <div className="flex items-center justify-between mt-6">
+                <Link to="/ecommerce-route/payment">
+                  <button
+                    type="button"
+                    className="focus:outline-none text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:ring-sky-300 font-medium rounded-lg text-sm px-4 py-3  dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-900"
+                  >
+                    Check Out
+                  </button>
+                </Link>
                 <button
-                  type="button"
-                  className="focus:outline-none text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:ring-sky-300 font-medium rounded-lg text-sm px-4 py-3  dark:bg-sky-600 dark:hover:bg-sky-700 dark:focus:ring-sky-900"
-                >
-                  Check Out
-                </button>
-                <button
+                  onClick={clearCart}
                   type="button"
                   className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-3  dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-900"
                 >
@@ -32,7 +35,10 @@ const Cart = () => {
               </div>
             </>
           ) : (
-            <h2 className="text-center text-green-700 text-3xl font-semibold"> No Data to Display</h2>
+            <h2 className="text-center text-green-700 text-3xl font-semibold">
+              {" "}
+              No Data to Display
+            </h2>
           )}
 
           {productCart?.map((productItems, index) => (

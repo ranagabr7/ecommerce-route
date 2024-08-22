@@ -23,10 +23,7 @@ export default function Products() {
       toast.error("error");
     }
   }
-  //   change color
-  function changecolor(id) {
-    settextcolor(!textcolor);
-  }
+ 
 
   async function getAllProduct() {
     return await axios.get("https://ecommerce.routemisr.com/api/v1/products");

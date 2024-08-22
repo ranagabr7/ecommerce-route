@@ -1,12 +1,12 @@
-import {  NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from "./../../assets/images/logo.svg";
 import { useContext, useState } from "react";
 import { authContext } from "../../Context/AuthContext";
 import { CartContext } from "../../Context/CartContext";
-import navbarStyle from "./navbar.module.css"
+import navbarStyle from "./navbar.module.css";
 
 const Navbar = () => {
- const {numofItems}= useContext(CartContext)
+  const { numofItems } = useContext(CartContext);
   const [openlinks, setopenLinks] = useState(false);
   const navigate = useNavigate();
   function logOut() {
@@ -18,11 +18,11 @@ const Navbar = () => {
   return (
     <>
       <nav className="bg-gray-100 md:py-3  px-5  top-0 z-30">
-        <div className={navbarStyle.container }>
-          <div className={navbarStyle.logo}>
+        <div className="container ">
+          <div className="logo">
             <img src={logo} alt="logo" width={120} />
             <div
-              className={navbarStyle.menuIcon}
+              className="menuIcon"
               onClick={() => {
                 setopenLinks(!openlinks);
               }}
@@ -53,7 +53,7 @@ const Navbar = () => {
             </div>
           </div>
           <div className="links">
-            <ul className={openlinks ?` ${navbarStyle.open} `: ""}>
+            <ul className={openlinks ? "open" : ""}>
               {token ? (
                 <>
                   <li className="my-3 lg:my-0">
@@ -65,7 +65,7 @@ const Navbar = () => {
                     <NavLink to="cart" className="mx-4 text-slate-600">
                       Cart
                       <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
-                      {numofItems}
+                        {numofItems}
                       </div>
                     </NavLink>
                   </li>

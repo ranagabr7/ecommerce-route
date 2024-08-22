@@ -33,7 +33,7 @@ const [productWishlist, setproductWishlist] = useState(null)
           token: localStorage.getItem("tKn"),
         },
       })
-      console.log(data?.data)
+     
       setproductWishlist(data?.data)
       return data;
     } catch (error) {
@@ -49,7 +49,7 @@ const [productWishlist, setproductWishlist] = useState(null)
           },
         }
       );
-      console.log(data)
+    
       getUserWishlist()
       return data;
     } catch (error) {

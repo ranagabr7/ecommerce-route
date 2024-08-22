@@ -2,7 +2,7 @@ import axios from "axios";
 import { useFormik } from "formik";
 import { useContext, useState } from "react";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { authContext } from "../../Context/AuthContext";
 // ----------------------------u
@@ -57,7 +57,7 @@ const Login = () => {
         <h1 className="text-center mb-8 text-4xl font-bold text-green-700 pt-5 mx-auto">
           Login Now
         </h1>
-        <div className="md:w-[70%] mx-auto p-4">
+        <div className="w-full md:w-[70%] mx-auto p-4">
           <form onSubmit={formik.handleSubmit}>
             {/* email */}
             <div className="relative z-0 w-full mt-1 mb-5 group">
@@ -131,7 +131,9 @@ const Login = () => {
                 )}
               </button>
               {/* to do forgetpass page */}
+             <Link to="/ecommerce-route/forgetPassword">
               <p className="cursor-pointer text-xl text-gray-900 dark:text-white">forget your password ?</p>
+              </Link>
             </div>
           </form>
         </div>
