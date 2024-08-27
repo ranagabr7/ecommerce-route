@@ -75,7 +75,7 @@ const Payment = () => {
   }
   return (
     <>
-      <section className="payment w-full md:w-[70%] mx-auto pt-16 pb-10 px-5">
+      <section className="payment w-full md:w-[70%] mx-auto pt-16 pb-10 px-10">
         <h2 className="text-center text-green-700 text-2xl p-5 font-semibold">
           Payment:
         </h2>

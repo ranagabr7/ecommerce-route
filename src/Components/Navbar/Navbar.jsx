@@ -34,8 +34,8 @@ const Navbar = () => {
                 <button onClick={logOut} className="mx-3 text-slate-600 ">
                   Logout
                 </button>
-              ) : (
-                <>
+              ) : 
+              
                   <ul className="">
                     <li>
                       <NavLink to="login" className="mx-3 text-slate-600">
@@ -48,8 +48,8 @@ const Navbar = () => {
                       </NavLink>
                     </li>
                   </ul>
-                </>
-              )}
+                
+              }
             </div>
           </div>
           <div className="links">
