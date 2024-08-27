@@ -49,26 +49,33 @@ const Payment = () => {
     //   call api
     try {
       const { data } = await axios.post(
-        `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=http://localhost:5181/ecommerce-route`,
-        // `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=${data.session.success_url}`,
+        `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}`,
+
         detailsShipping,
         {
           headers: {
             token: localStorage.getItem("tKn"),
           },
+          params: {
+            // url: data.session.success_url,
+            url: "http://localhost:5181/ecommerce-route",
+
+          },
         }
       );
-      console.log(data);
+    //   console.log(data);
+      console.log(data.session.success_url);
       window.open(data.session.url);
+    // window.location.origin(data.session.url)
       toast.success(data.status);
-      console.log(data);
+    
     } catch (error) {
       toast.error("error online payment");
     }
   }
   return (
     <>
-      <section className="payment w-full md:w-[70%] mx-auto pt-16 pb-10">
+      <section className="payment w-full md:w-[70%] mx-auto pt-16 pb-10 px-5">
         <h2 className="text-center text-green-700 text-2xl p-5 font-semibold">
           Payment:
         </h2>

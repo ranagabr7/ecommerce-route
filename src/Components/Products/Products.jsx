@@ -16,7 +16,7 @@ export default function Products() {
   // add product to wishlist
   async function AddToWishList(id) {
     const data = await AddproductToWishList(id);
-    console.log(data);
+
     if (data) {
       toast.success(data.message);
     } else {

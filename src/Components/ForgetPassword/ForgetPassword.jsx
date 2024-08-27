@@ -24,7 +24,7 @@ const ForgetPassword = () => {
   }
   return (
     <>
-      <section className="w-full w-full md:w-[70%] mx-auto pt-16 pb-10">
+      <section className="w-full w-full md:w-[70%] mx-auto px-5 pt-16 pb-10">
         <h2 className="text-center text-green-700 text-2xl p-5 font-semibold">
           please enter your email:
         </h2>

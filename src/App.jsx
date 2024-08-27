@@ -21,6 +21,7 @@ import AllOrder from "./Components/AllOrder/AllOrder";
 import ForgetPassword from "./Components/ForgetPassword/ForgetPassword";
 import ResetCode from "./Components/ResetCode/ResetCode";
 import ResetAccount from "./Components/ResetAccount/ResetAccount";
+import { Offline } from "react-detect-offline";
 
 function App() {
   const x = new QueryClient();
@@ -131,6 +132,11 @@ function App() {
           <AddtoWishListprovider>
             <CartContextProvider>
               <Toaster />
+              <Offline>
+                <div className="bg-black text-white text-center fixed bottom-5 left-5 p-1">
+                  <p>Internet cooruptted</p>
+                </div>
+              </Offline>
               <RouterProvider router={router} />
             </CartContextProvider>
           </AddtoWishListprovider>
